@@ -1,6 +1,8 @@
 import math,sys
 import pygame
 from pygame.locals import *
+from MotorModule import Motor
+from AngleModule import Orientation
 
 #exit game if window is closed
 def events():
@@ -32,6 +34,8 @@ RobotX,RobotY = w/2,h/2 #Robot position at center
 PmouseX, PmouseY = RobotX,RobotY #Mouse position
 dx,dy = 0,0 #Robot movement
 totalDistance = 0 #Total distance traveled
+motor = Motor(23,24,25,17,22,27) #initialize motot at the following GPIOs
+IMU = Orientation()
 
 while True:
     events()
@@ -44,6 +48,15 @@ while True:
         thetaSend = 90+theta*180/math.pi
         if thetaSend >180:
             thetaSend = thetaSend - 360
+        errorTheta = thetaSend - IMU.angle()
+        while errorTheta > 10:
+            motor.moveForward(0.5,1,0.1)
+            errorTheta = thetaSend - IMU.angle()
+        motor.stop()
+        while errorTheta < -10:
+            motor.moveForward(0.5,-1,0.1)
+            errorTheta = thetaSend - IMU.angle()
+        motor.stop()
         print(dx,dy,thetaSend)
         totalDistance = int(math.sqrt((mouseX-PmouseX)**2+(mouseY-PmouseY)**2)) #Total distance to mouse
         
@@ -56,6 +69,7 @@ while True:
     if totalDistance > 0:
         pygame.draw.circle(screen,RED,(PmouseX,PmouseY),5)
         pygame.draw.line(screen,RED,(int(RobotX),int(RobotY)),(int(PmouseX),int(PmouseY)))
+    
     pygame.display.update()
     CLOCK.tick(FPS)
     screen.fill(BLACK)

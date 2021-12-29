@@ -2,7 +2,6 @@ import RPi.GPIO as GPIO #control the gpio pins
 from time import sleep
 from picamera import PiCamera
 
-
 #camera = PiCamera()
 
 
