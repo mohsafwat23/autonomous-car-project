@@ -21,6 +21,7 @@ class Orientation():
         if angle is not None:
             if angle > 180:
                 angle = angle - 360
+        print(angle)
         return angle
 
 if __name__ == '__main__':

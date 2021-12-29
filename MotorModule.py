@@ -45,17 +45,17 @@ class Motor():
         self.pwmA.ChangeDutyCycle(abs(leftSpeed))
         self.pwmB.ChangeDutyCycle(abs(rightSpeed))
         if leftSpeed < 0:
-            GPIO.output(self.In1a, GPIO.LOW)
-            GPIO.output(self.In2a, GPIO.HIGH)
-        else:
             GPIO.output(self.In1a, GPIO.HIGH)
             GPIO.output(self.In2a, GPIO.LOW)
-        if rightSpeed < 0:
-            GPIO.output(self.In1b, GPIO.LOW)  
-            GPIO.output(self.In2b, GPIO.HIGH)
         else:
-            GPIO.output(self.In1b, GPIO.HIGH)
+            GPIO.output(self.In1a, GPIO.LOW)
+            GPIO.output(self.In2a, GPIO.HIGH)
+        if rightSpeed < 0:
+            GPIO.output(self.In1b, GPIO.HIGH)  
             GPIO.output(self.In2b, GPIO.LOW)
+        else:
+            GPIO.output(self.In1b, GPIO.LOW)
+            GPIO.output(self.In2b, GPIO.HIGH)
         sleep(t)
 
     def stop(self, t=0):
@@ -66,7 +66,7 @@ class Motor():
 if __name__ == '__main__':
     #camera.start_preview()
     motor = Motor(23,24,25,17,22,27) #initialize motot at the following GPIOs
-    motor.moveForward(0.5+,0,1)
+    motor.moveForward(0.2,0,0.2)
     motor.stop()
 
 
