@@ -2,6 +2,7 @@
 Video: https://youtu.be/mbgRzDDy74w
 
 ## Hardware 
+
 <img src="https://github.com/mohsafwat23/autonomous-car-project/blob/f58edff6497e74ac6c898377fa7bc6cb5c12357d/Assets/assembley.jpg" width="500" height="500">
 
 * Raspberry Pi
@@ -15,6 +16,7 @@ Video: https://youtu.be/mbgRzDDy74w
 
 ## Circuit 
 The hardware is connected using the following circuit:
+
 <img src="https://github.com/mohsafwat23/autonomous-car-project/blob/2aab08b30034cf3d4843e20c9825e95176afcf1a/Assets/circuit.jpeg" width="500" height="400">
 
 Additionaly, the Raspberry Pi is powered using a powerbank.
