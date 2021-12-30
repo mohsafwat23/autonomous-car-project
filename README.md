@@ -25,7 +25,7 @@ The main file is RobotGame.py.
 * The car's orientation is obtained from the BNO055 sensor and the code is in AngleModule.py.
 * The motors are controlled using the motor driver and the code is in MotorModule.py.
 * I'm using Pygame to plan the path for the car as shown below:
-* 
-<img src="https://github.com/mohsafwat23/autonomous-car-project/blob/f58edff6497e74ac6c898377fa7bc6cb5c12357d/Assets/pygame.png" width="500" height="400">
+
+<img src="https://github.com/mohsafwat23/autonomous-car-project/blob/f58edff6497e74ac6c898377fa7bc6cb5c12357d/Assets/pygame.png" width="600" height="400">
 
 
