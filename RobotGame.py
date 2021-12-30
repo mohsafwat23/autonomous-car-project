@@ -37,14 +37,15 @@ dx,dy = 0,0 #Robot movement
 totalDistance = 0 #Total distance traveled
 motor = Motor(23,24,25,17,22,27) #initialize motot at the following GPIOs
 IMU = Orientation()
-speed = 3
+speed = 5
 
 while True:
     events()
     angle = IMU.angle()
+    print("totaldist1:",totalDistance)
     #Get mouse position
     m = pygame.mouse.get_pressed()
-    if m[0] and totalDistance == 0:
+    if m[0] and -1<=totalDistance <= 1:
         mouseX,mouseY = pygame.mouse.get_pos()
         theta = math.atan2(mouseY-PmouseY,mouseX-PmouseX) #Angle between previous mouse and new mouse
         dx,dy = math.cos(theta)*speed,math.sin(theta)*speed #Robot movement
@@ -57,8 +58,8 @@ while True:
             while errorTheta > 5:
                 angle = IMU.angle()
                 if angle is not None:
-                    print(thetaSend,angle,errorTheta)
-                    motor.moveForward(0.1,-0.2,0.1)
+                    #print(thetaSend,angle,errorTheta)
+                    motor.moveForward(0.2,-0.2,0.1)
                     errorTheta = thetaSend - angle
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     motor.stop()
@@ -67,20 +68,20 @@ while True:
             while errorTheta < -5:
                 angle = IMU.angle()
                 if angle is not None:
-                    print(thetaSend,angle,errorTheta)
-                    motor.moveForward(0.1,0.2,0.1)
+                    #print(thetaSend,angle,errorTheta)
+                    motor.moveForward(0.2,0.2,0.1)
                     errorTheta = thetaSend - angle
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     motor.stop()
                     break
             motor.stop()
-        print(dx,dy,thetaSend)
+        #print(dx,dy,thetaSend)
         totalDistance = int(math.sqrt((mouseX-PmouseX)**2+(mouseY-PmouseY)**2))/speed #Total distance to mouse
         
         PmouseX,PmouseY = mouseX,mouseY #mouse new position
     if totalDistance > 0:
-
-        motor.moveForward(0.2,0,0.1)
+        print("totaldist2:",totalDistance)
+        motor.moveForward(0.25,0,0.1)
         totalDistance -= 1
         RobotX += dx
         RobotY += dy
